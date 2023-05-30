@@ -47,6 +47,4 @@ I hope this helps you create a README.md file with pnpm installation instruction
 
 # Resources
 
-1. How to install and setup express server with typescript
-
-   [Link](https://blog.logrocket.com/how-to-set-up-node-typescript-express/)
+1. How to install and setup express server with typescript [Link](https://blog.logrocket.com/how-to-set-up-node-typescript-express/)
