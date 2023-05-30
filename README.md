@@ -20,21 +20,22 @@ To get started with this project, follow these steps:
    ```shell
    pnpm install
 
-   This will install all the required packages defined in the package.json file.
-
    ```
+
+   This will install all the required packages defined in the package.json file.
 
 4. Start the project in dev mode:
 
    ```shell
    pnpm dev
 
-   This will run the project and start the application.
    ```
+
+   This will run the project and start the application.
 
 Open your web browser and visit http://localhost:1337 to access the application.
 
-#License
+# License
 
 MIT
 
@@ -46,6 +47,6 @@ I hope this helps you create a README.md file with pnpm installation instruction
 
 # Resources
 
-## How to install and setup express server with typescript
+1. How to install and setup express server with typescript
 
-[article](https://blog.logrocket.com/how-to-set-up-node-typescript-express/)
+   [Link](https://blog.logrocket.com/how-to-set-up-node-typescript-express/)
