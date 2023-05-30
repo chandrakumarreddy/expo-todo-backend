@@ -9,5 +9,6 @@ router.route('/create').post(createUser)
 router.route('/login').post(getUser)
 
 router.use(categoryRoutes)
+router.use(taskRoutes)
 
 export default router

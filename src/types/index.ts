@@ -24,3 +24,11 @@ export interface ICategory {
   }
   isEditable?: boolean
 }
+
+export interface ITask {
+  user?: string
+  categoryId: string
+  name: string
+  isCompleted: string
+  date: string
+}
