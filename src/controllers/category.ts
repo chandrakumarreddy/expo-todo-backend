@@ -1,57 +1,58 @@
-import { Response } from "express";
-import Category from "../models/category";
-import { ICategory, IUserRequest } from "../types";
+import { type Response } from 'express'
+
+import Category from '../models/category'
+import { type ICategory, type IUserRequest } from '../types'
 
 const getAllCategoriesByUser = async (req: IUserRequest, res: Response) => {
   try {
-    const userId = req.user;
+    const userId = req.user
 
     const categories = await Category.find({ user: userId }).select(
-      "-user -__v"
-    );
+      '-user -__v'
+    )
 
-    res.status(200).json({ categories });
+    res.status(200).json({ categories })
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Something went wrong", error });
+    console.log(error)
+    res.status(500).json({ message: 'Something went wrong', error })
   }
-};
+}
 
 const addCategory = async (req: IUserRequest, res: Response) => {
   try {
-    const { name, isEditable, color, icon } = req.body as ICategory;
+    const { name, isEditable, color, icon } = req.body as ICategory
 
     const category = {
       name,
       isEditable,
       color,
-      icon,
-    };
+      icon
+    }
 
     const newCategory = new Category({
       ...category,
-      user: req.user,
-    });
+      user: req.user
+    })
 
-    await newCategory.save();
+    await newCategory.save()
 
-    res.status(201).json({ category });
+    res.status(201).json({ category })
   } catch (error) {
-    res.status(500).json({ message: "Something went wrong", error });
+    res.status(500).json({ message: 'Something went wrong', error })
   }
-};
+}
 
 const deleteCategory = async (req: IUserRequest, res: Response) => {
   try {
-    const { categoryId } = req.params;
+    const { categoryId } = req.params
     await Category.deleteOne({
       _id: categoryId,
-      user: req.user,
-    });
-    res.status(200).json({ message: "Category deleted successfully" });
+      user: req.user
+    })
+    res.status(200).json({ message: 'Category deleted successfully' })
   } catch (error) {
-    res.status(500).json({ message: "Something went wrong", error });
+    res.status(500).json({ message: 'Something went wrong', error })
   }
-};
+}
 
-export { getAllCategoriesByUser, addCategory, deleteCategory };
+export { getAllCategoriesByUser, addCategory, deleteCategory }

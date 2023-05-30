@@ -1,12 +1,13 @@
-import express from "express";
-import { createUser, getUser } from "../controllers/user";
-import categoryRoutes from "./category";
+import express from 'express'
 
-const router = express.Router();
+import { createUser, getUser } from '../controllers/user'
+import categoryRoutes from './category'
 
-router.route("/create").post(createUser);
-router.route("/login").post(getUser);
+const router = express.Router()
 
-router.use(categoryRoutes);
+router.route('/create').post(createUser)
+router.route('/login').post(getUser)
 
-export default router;
+router.use(categoryRoutes)
+
+export default router

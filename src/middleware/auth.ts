@@ -1,30 +1,31 @@
-import { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
-import { IUserRequest, JwtPayload } from "../types";
+import { type NextFunction, type Response } from 'express'
+
+import jwt from 'jsonwebtoken'
+
+import { type IUserRequest, type JwtPayload } from '../types'
 
 const authenticateMiddleware = (
   req: IUserRequest,
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.headers.authorization;
+  const token = req.headers.authorization
 
   if (!token) {
-    return res.status(401).json({ message: "No token provided" });
+    return res.status(401).json({ message: 'No token provided' })
   }
 
   try {
-    const decoded = jwt.verify(
-      token,
-      process.env.JWT_SECRET_KEY!
-    ) as JwtPayload;
+    if (!process.env.JWT_SECRET_KEY) throw new Error('JWT_SECRET_KEY not found')
 
-    req.user = decoded.id;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY) as JwtPayload
 
-    next();
+    req.user = decoded.id
+
+    next()
   } catch (error) {
-    return res.status(401).json({ message: "Invalid token" });
+    return res.status(401).json({ message: 'Invalid token' })
   }
-};
+}
 
-export { authenticateMiddleware };
+export { authenticateMiddleware }

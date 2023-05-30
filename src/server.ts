@@ -1,27 +1,32 @@
-import express, { Request, Response } from "express";
-import dotenv from "dotenv";
-import { connectToDatabase } from "./db";
-import userRoutes from "./routes/user";
+import express, { type Response } from 'express'
 
-dotenv.config();
+import dotenv from 'dotenv'
+import swaggerUi from 'swagger-ui-express'
+
+import { PORT } from './config'
+import { swaggerDocs } from './config/swagger'
+import { connectToDatabase } from './db'
+import v1Routes from './routes/v1'
+
+dotenv.config()
 
 async function main() {
-  await connectToDatabase();
+  await connectToDatabase()
 
-  const app = express();
-  app.use(express.json());
+  const app = express()
+  app.use(express.json())
 
-  const port = process.env.PORT || "1337";
+  app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
-  app.get("/ping", (req: Request, res: Response) => {
-    res.send("pong");
-  });
+  app.get('/ping', (_, res: Response) => {
+    res.send('pong')
+  })
 
-  app.use("/user", userRoutes);
+  app.use('/api/v1', v1Routes)
 
-  app.listen(port, () => {
-    console.log(`[server]: Server is running at http://localhost:${port}`);
-  });
+  app.listen(PORT, () => {
+    console.log(`[server]: Server is running at http://localhost:${PORT}`)
+  })
 }
 
-main();
+main().catch(console.error)

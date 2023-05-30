@@ -1,26 +1,26 @@
-import express from "express";
+import type express from 'express'
 
 export interface JwtPayload {
-  id: string;
-  email: string;
-  name: string;
+  id: string
+  email: string
+  name: string
 }
 
 export interface IUserRequest extends express.Request {
-  user?: string;
+  user?: string
 }
 
 export interface ICategory {
-  name: String;
+  name: string
   icon: {
-    id: String;
-    name: String;
-    code: String;
-  };
+    id: string
+    name: string
+    code: string
+  }
   color: {
-    id: String;
-    name: String;
-    code: String;
-  };
-  isEditable?: boolean;
+    id: string
+    name: string
+    code: string
+  }
+  isEditable?: boolean
 }
