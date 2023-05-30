@@ -42,6 +42,28 @@ const addCategory = async (req: IUserRequest, res: Response) => {
   }
 }
 
+const updateCategory = async (req: IUserRequest, res: Response) => {
+  const { categoryId } = req.params
+  const { name, isEditable, color, icon } = req.body
+
+  try {
+    const category = await Category.findById(categoryId)
+    if (!category) {
+      return res.status(404).json({ error: 'Category not found' })
+    }
+    category.name = name
+    category.isEditable = isEditable
+    category.color = color
+    category.icon = icon
+
+    await category.save()
+
+    res.json(category)
+  } catch (error) {
+    res.status(500).json({ message: 'Something went wrong', error })
+  }
+}
+
 const deleteCategory = async (req: IUserRequest, res: Response) => {
   try {
     const { categoryId } = req.params
@@ -55,4 +77,4 @@ const deleteCategory = async (req: IUserRequest, res: Response) => {
   }
 }
 
-export { getAllCategoriesByUser, addCategory, deleteCategory }
+export { getAllCategoriesByUser, addCategory, updateCategory, deleteCategory }
