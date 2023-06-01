@@ -2,6 +2,7 @@ import express from 'express'
 
 import { createUser, getUser } from '../controllers/user'
 import categoryRoutes from './category'
+import taskRoutes from './task'
 
 const router = express.Router()
 

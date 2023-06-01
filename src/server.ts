@@ -1,6 +1,7 @@
 import express, { type Response } from 'express'
 
 import dotenv from 'dotenv'
+import morgan from 'morgan'
 import swaggerUi from 'swagger-ui-express'
 
 import { PORT } from './config'
@@ -14,6 +15,7 @@ async function main() {
   await connectToDatabase()
 
   const app = express()
+  app.use(morgan('common'))
   app.use(express.json())
 
   app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
